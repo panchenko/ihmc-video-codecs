@@ -1,4 +1,6 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.5)
+
+project(ihmc-video-codecs)
 
 SET(OPENH264_HOME ~/workspace/openh264 CACHE FILEPATH "Path to openh264 sources")
 SET(LIBYUV_HOME ~/workspace/libyuv/trunk/ CACHE FILEPATH "Path to libyuv sources")
@@ -35,6 +37,6 @@ ELSEIF(UNIX)
 ENDIF(APPLE)
 
 add_subdirectory(csrc)
-add_subdirectory (swig)
+add_subdirectory(src/main/swig)
 
 

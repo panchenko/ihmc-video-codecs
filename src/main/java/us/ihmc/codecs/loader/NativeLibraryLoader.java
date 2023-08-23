@@ -16,7 +16,11 @@ import us.ihmc.codecs.Version;
  */
 public class NativeLibraryLoader
 {
-   private final static String archString = isX86_64() ? "64" : "32";
+   /**
+    * Folder in resources and suffix of the folder for libraries extracted on disk
+    */
+   static final String ARM_64 = "arm64";
+   private final static String archString = isArm64() ? ARM_64 : (isX86_64() ? "64" : "32");
    public final static String LIBRARY_LOCATION = new File(System.getProperty("user.home"), ".ihmc" + File.separator + "lib" + File.separator + "openh264-" + OpenH264Downloader.openH264Version + "-" + archString).getAbsolutePath();
    
    private final static String LIBYUV_MAC_64 = "libihmcVideoCodecs.jnilib";
@@ -103,7 +107,8 @@ public class NativeLibraryLoader
       File lib = new File(directory, library + "." + version);
       if(!lib.exists())
       {
-         InputStream stream = NativeLibraryLoader.class.getClassLoader().getResourceAsStream(library);
+         String resourceName = isArm64() ? ARM_64 + "/" + library : library;
+         InputStream stream = NativeLibraryLoader.class.getClassLoader().getResourceAsStream(resourceName);
          writeStreamToFile(stream, lib);
          
          try
@@ -155,7 +160,12 @@ public class NativeLibraryLoader
    {
       return System.getProperty("os.name").equals("MacOSX") || System.getProperty("os.name").equals("Mac OS X");
    }
-   
+
+   public static boolean isArm64()
+   {
+      return System.getProperty("os.arch").contains("aarch64");
+   }
+
    public static boolean isX86_64()
    {
       return System.getProperty("os.arch").contains("64");

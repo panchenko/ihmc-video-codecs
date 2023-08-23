@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 
 IF(WIN32)
 	LINK_DIRECTORIES("${LIBYUV_HOME}/out/Release/clang_x64/obj")
@@ -9,9 +9,8 @@ ELSE()
 ENDIF(WIN32)
 
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
-INCLUDE_DIRECTORIES("${LIBYUV_HOME}/include")
-INCLUDE_DIRECTORIES("${LIBYUV_HOME}/third_party/libjpeg_turbo/")
-INCLUDE_DIRECTORIES("${LIBYUV_HOME}/chromium/src/third_party/libjpeg_turbo/")
+INCLUDE_DIRECTORIES("${LIBYUV_HOME}/src/include/")
+INCLUDE_DIRECTORIES("${LIBYUV_HOME}/src/third_party/libjpeg_turbo/")
 
 add_library(yuvPicture OBJECT RGBPicture.cpp YUVPicture.cpp JPEGDecoderImpl.cpp JPEGEncoderImpl.cpp)
 set_property(TARGET yuvPicture PROPERTY POSITION_INDEPENDENT_CODE TRUE)

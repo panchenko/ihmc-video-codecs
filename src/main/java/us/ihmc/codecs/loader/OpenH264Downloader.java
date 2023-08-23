@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -147,6 +148,19 @@ public class OpenH264Downloader
 
       if (!library.exists())
       {
+         if (NativeLibraryLoader.isArm64()) {
+            String resourceName = NativeLibraryLoader.isArm64() ? NativeLibraryLoader.ARM_64 + "/" + library.getName() : library.getName();
+            try (InputStream stream = NativeLibraryLoader.class.getClassLoader().getResourceAsStream(resourceName)) {
+               if (stream == null) {
+                  throw new UnsatisfiedLinkError("OpenH264 missing in resources: " + resourceName);
+               }
+               Files.copy(stream, library.toPath());
+            } catch (IOException e) {
+               throw new RuntimeException("Error extracting " + resourceName, e);
+            }
+            openH264HasBeenLoaded = true;
+            return;
+         }
          if (showLicenseDialog)
          {
             acceptLicense();
