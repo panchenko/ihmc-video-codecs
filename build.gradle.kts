@@ -28,7 +28,7 @@ tasks.withType<JavaCompile> {
 
 // CUSTOM VERSION AND PUBLISHING CODE
 //
-version = "2.2.0"
+version = "2.2.2"
 publishing {
    repositories {
       maven {
