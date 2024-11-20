@@ -26,7 +26,7 @@ public class JPEGTest
       Random random = new Random(9872412L);
       for (int i = 0; i < 1000; i++)
       {
-         YUVPicture jpeg = decoder.readJPEG(JPEGExample.class.getClassLoader().getResource("testImage.jpg"));
+         YUVPicture jpeg = decoder.readJPEG(JPEGTest.class.getClassLoader().getResource("testImage.jpg"));
          int w = random.nextInt(3000);
          int h = random.nextInt(3000);
          jpeg.scale(w + 1, h + 1, FilterModeEnum.kFilterLinear);

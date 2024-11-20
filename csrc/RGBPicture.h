@@ -18,7 +18,7 @@
 #ifndef RGBPICTURE_H
 #define RGBPICTURE_H
 
-#define LIBYUV_DISABLE_NEON
+#define LIBYUV_LEGACY_TYPES
 #include <libyuv/basic_types.h>
 #include <YUVPicture.h>
 

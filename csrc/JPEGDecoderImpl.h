@@ -18,7 +18,7 @@
 #ifndef JPEGDECODERIMPL_H
 #define JPEGDECODERIMPL_H
 
-#define LIBYUV_DISABLE_NEON
+#define LIBYUV_LEGACY_TYPES
 #include <libyuv.h>
 #include <YUVPicture.h>
 
